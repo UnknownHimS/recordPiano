@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piano Recorder</title>
-    <link rel="icon" href="https://png.pngtree.com/png-clipart/20220103/original/pngtree-piano-cartoon-element-design-png-image_7011030.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -12,30 +11,53 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #e5e5e5;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 1px rgba(255,255,255,0.1) inset;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 10px 40px rgba(200, 16, 46, 0.4);
         }
         h1 {
-            text-align: center;
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 2.5em;
+            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            font-size: 3em;
+            font-weight: 700;
+            letter-spacing: -1px;
         }
         .subtitle {
             text-align: center;
-            color: #6b7280;
-            margin-bottom: 30px;
+            color: #888;
+            margin-bottom: 40px;
             font-size: 14px;
+            font-weight: 500;
         }
         .main-content {
             display: grid;
@@ -44,126 +66,182 @@
             margin-bottom: 30px;
         }
         .section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
         .section h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5em;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, #c8102e 0%, #8b0000 100%);
+            border-radius: 2px;
         }
         .recorder-controls {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
         button {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 15px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         }
         .record-btn {
-            background: #ef4444;
+            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
             color: white;
         }
         .record-btn:hover {
-            background: #dc2626;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(200, 16, 46, 0.4);
         }
         .record-btn.recording {
-            background: #991b1b;
+            background: linear-gradient(135deg, #8b0000 0%, #5a0000 100%);
             animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { box-shadow: 0 6px 24px rgba(200, 16, 46, 0.6); }
+            50% { box-shadow: 0 6px 32px rgba(200, 16, 46, 0.9); }
         }
         .stop-btn {
-            background: #6b7280;
+            background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
             color: white;
         }
         .stop-btn:hover {
-            background: #4b5563;
+            background: linear-gradient(135deg, #4a4a4a 0%, #3a3a3a 100%);
+            transform: translateY(-2px);
         }
         .play-btn {
-            background: #10b981;
+            background: linear-gradient(135deg, #2d7a3e 0%, #1a5526 100%);
             color: white;
+            padding: 10px 20px;
+            font-size: 14px;
         }
         .play-btn:hover {
-            background: #059669;
+            background: linear-gradient(135deg, #3a9150 0%, #2d7a3e 100%);
+            transform: translateY(-2px);
         }
         .save-btn {
-            background: #667eea;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
             color: white;
         }
         .save-btn:hover {
-            background: #5568d3;
+            background: linear-gradient(135deg, #0077ee 0%, #0066cc 100%);
+            transform: translateY(-2px);
         }
         .download-btn {
-            background: #f59e0b;
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
             color: white;
+            padding: 10px 20px;
+            font-size: 14px;
         }
         .download-btn:hover {
-            background: #d97706;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transform: translateY(-2px);
         }
         .delete-btn {
-            background: #ef4444;
+            background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
             color: white;
-            padding: 8px 12px;
+            padding: 10px 16px;
             font-size: 14px;
         }
         .delete-btn:hover {
-            background: #dc2626;
+            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+            transform: translateY(-2px);
         }
         button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
+            transform: none !important;
         }
         .lyrics-editor {
             width: 100%;
-            min-height: 300px;
-            padding: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 16px;
-            font-family: 'Courier New', monospace;
+            min-height: 320px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             resize: vertical;
+            background: rgba(0,0,0,0.3);
+            color: #e5e5e5;
+            line-height: 1.6;
         }
         .lyrics-editor:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #c8102e;
+            background: rgba(0,0,0,0.4);
+        }
+        .lyrics-editor::placeholder {
+            color: #666;
         }
         .recordings-list {
-            max-height: 400px;
+            max-height: 450px;
             overflow-y: auto;
         }
+        .recordings-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .recordings-list::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+        }
+        .recordings-list::-webkit-scrollbar-thumb {
+            background: rgba(200, 16, 46, 0.5);
+            border-radius: 4px;
+        }
+        .recordings-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 16, 46, 0.7);
+        }
         .recording-item {
-            background: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s;
+        }
+        .recording-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(200, 16, 46, 0.3);
+            transform: translateX(4px);
         }
         .recording-info {
             flex: 1;
         }
         .recording-name {
             font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 5px;
+            color: #fff;
+            margin-bottom: 6px;
+            font-size: 16px;
         }
         .recording-date {
             font-size: 12px;
-            color: #6b7280;
+            color: #888;
+            font-weight: 500;
         }
         .recording-actions {
             display: flex;
@@ -171,37 +249,78 @@
             flex-wrap: wrap;
         }
         .status {
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 18px;
             text-align: center;
             font-weight: 600;
+            font-size: 14px;
+            border: 1px solid;
         }
         .status.recording {
-            background: #fee2e2;
-            color: #991b1b;
+            background: rgba(200, 16, 46, 0.15);
+            color: #ff4d6d;
+            border-color: rgba(200, 16, 46, 0.3);
         }
         .status.idle {
-            background: #dbeafe;
-            color: #1e40af;
+            background: rgba(0, 102, 204, 0.15);
+            color: #6bb6ff;
+            border-color: rgba(0, 102, 204, 0.3);
         }
         .status.saved {
-            background: #d1fae5;
-            color: #065f46;
+            background: rgba(45, 122, 62, 0.15);
+            color: #5dd879;
+            border-color: rgba(45, 122, 62, 0.3);
         }
         input[type="text"] {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 15px;
+            margin-bottom: 18px;
+            background: rgba(0,0,0,0.3);
+            color: #e5e5e5;
+            transition: all 0.3s;
         }
         input[type="text"]:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #c8102e;
+            background: rgba(0,0,0,0.4);
+        }
+        input[type="text"]::placeholder {
+            color: #666;
+        }
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 10px;
+            filter: brightness(0.9);
+        }
+        .count-badge {
+            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+        .lyrics-tag {
+            font-size: 12px;
+            color: #888;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
             .main-content {
                 grid-template-columns: 1fr;
             }
@@ -213,32 +332,41 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎹 Piano Recorder</h1>
-        <div class="subtitle">Auto-saves to localStorage • Download & Share on Facebook</div>
+        <div class="header">
+            <div class="logo">🎹</div>
+            <h1>Piano Recorder</h1>
+            <div class="subtitle">Professional Recording Studio • Auto-Save • Download & Share</div>
+        </div>
         
         <div class="main-content">
             <div class="section">
-                <h2>Recording</h2>
+                <h2>Recording Studio</h2>
                 <div class="status idle" id="status">Ready to Record</div>
-                <input type="text" id="recordingName" placeholder="Recording name (optional)" />
+                <input type="text" id="recordingName" placeholder="Enter recording name..." />
                 <div class="recorder-controls">
                     <button class="record-btn" id="recordBtn">🔴 Record</button>
                     <button class="stop-btn" id="stopBtn" disabled>⏹ Stop</button>
                     <button class="save-btn" id="saveBtn" disabled>💾 Save</button>
                 </div>
-                <audio id="audioPlayback" controls style="width: 100%; margin-top: 15px; display: none;"></audio>
+                <audio id="audioPlayback" controls style="display: none;"></audio>
             </div>
 
             <div class="section">
-                <h2>Lyrics</h2>
-                <textarea class="lyrics-editor" id="lyricsEditor" placeholder="Write your lyrics here..."></textarea>
+                <h2>Lyrics Editor</h2>
+                <textarea class="lyrics-editor" id="lyricsEditor" placeholder="Write your lyrics here...
+
+Verse 1:
+...
+
+Chorus:
+..."></textarea>
             </div>
         </div>
 
         <div class="section">
-            <h2>Saved Recordings (<span id="recordingCount">0</span>)</h2>
+            <h2>Library <span class="count-badge" id="recordingCount">0</span></h2>
             <div class="recordings-list" id="recordingsList">
-                <p style="text-align: center; color: #6b7280;">No recordings yet. Start recording!</p>
+                <p style="text-align: center; color: #666; padding: 40px 0;">No recordings yet. Start your first recording!</p>
             </div>
         </div>
     </div>
@@ -259,7 +387,6 @@
         const recordingsList = document.getElementById('recordingsList');
         const recordingCount = document.getElementById('recordingCount');
 
-        // Load recordings from localStorage on startup
         loadRecordings();
 
         recordBtn.addEventListener('click', startRecording);
@@ -347,7 +474,7 @@
                 currentRecordingBlob = null;
                 saveBtn.disabled = true;
                 status.className = 'status saved';
-                status.textContent = '✅ Saved to localStorage! Ready for next recording';
+                status.textContent = '✅ Saved Successfully! Ready for next recording';
                 
                 setTimeout(() => {
                     status.className = 'status idle';
@@ -361,7 +488,7 @@
             recordingCount.textContent = recordings.length;
             
             if (recordings.length === 0) {
-                recordingsList.innerHTML = '<p style="text-align: center; color: #6b7280;">No recordings yet. Start recording!</p>';
+                recordingsList.innerHTML = '<p style="text-align: center; color: #666; padding: 40px 0;">No recordings yet. Start your first recording!</p>';
                 return;
             }
 
@@ -370,7 +497,7 @@
                     <div class="recording-info">
                         <div class="recording-name">${rec.name}</div>
                         <div class="recording-date">${rec.date}</div>
-                        ${rec.lyrics ? '<div style="font-size: 12px; color: #6b7280; margin-top: 5px;">📝 Has lyrics</div>' : ''}
+                        ${rec.lyrics ? '<div class="lyrics-tag">📝 Includes lyrics</div>' : ''}
                     </div>
                     <div class="recording-actions">
                         <button class="play-btn" onclick="playRecording(${rec.id})">▶ Play</button>
@@ -396,13 +523,11 @@
         function downloadRecording(id) {
             const recording = recordings.find(r => r.id === id);
             if (recording) {
-                // Download audio file
                 const a = document.createElement('a');
                 a.href = recording.audioData;
                 a.download = `${recording.name}.wav`;
                 a.click();
 
-                // Download lyrics if available
                 if (recording.lyrics) {
                     const lyricsBlob = new Blob([recording.lyrics], { type: 'text/plain' });
                     const lyricsUrl = URL.createObjectURL(lyricsBlob);
